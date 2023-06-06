@@ -9,6 +9,7 @@ namespace Spryker\Zed\OauthClient\Business\Expander;
 
 use Generated\Shared\Transfer\AccessTokenRequestOptionsTransfer;
 use Generated\Shared\Transfer\AccessTokenRequestTransfer;
+use Generated\Shared\Transfer\HttpRequestTransfer;
 use Generated\Shared\Transfer\MessageAttributesTransfer;
 use Generated\Shared\Transfer\PaymentAuthorizeRequestTransfer;
 use Spryker\Zed\OauthClient\Business\Exception\AccessTokenNotFoundException;
@@ -81,6 +82,28 @@ class RequestAuthorizationDataExpander implements RequestAuthorizationDataExpand
         $messageAttributesTransfer->setAuthorization($this->getAuthorizationValue($accessTokenRequestTransfer));
 
         return $messageAttributesTransfer;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @return \Generated\Shared\Transfer\HttpRequestTransfer
+     */
+    public function expandHttpRequest(HttpRequestTransfer $httpRequestTransfer): HttpRequestTransfer
+    {
+        $accessTokenRequestOptionsTransfer = (new AccessTokenRequestOptionsTransfer())
+            ->setAudience($this->oauthClientConfig->getOauthOptionAudienceForMessageBroker());
+
+        $accessTokenRequestTransfer = (new AccessTokenRequestTransfer())
+            ->setGrantType($this->oauthClientConfig->getOauthGrantTypeForMessageBroker())
+            ->setProviderName($this->oauthClientConfig->getOauthProviderNameForMessageBroker())
+            ->setAccessTokenRequestOptions($accessTokenRequestOptionsTransfer);
+
+        $httpRequestTransfer->setAuthorization($this->getAuthorizationValue($accessTokenRequestTransfer));
+
+        return $httpRequestTransfer;
     }
 
     /**

@@ -9,6 +9,7 @@ namespace Spryker\Zed\OauthClient\Business;
 
 use Generated\Shared\Transfer\AccessTokenRequestTransfer;
 use Generated\Shared\Transfer\AccessTokenResponseTransfer;
+use Generated\Shared\Transfer\HttpRequestTransfer;
 use Generated\Shared\Transfer\MessageAttributesTransfer;
 use Generated\Shared\Transfer\PaymentAuthorizeRequestTransfer;
 
@@ -31,6 +32,16 @@ interface OauthClientFacadeInterface
      * @return \Generated\Shared\Transfer\AccessTokenResponseTransfer
      */
     public function getAccessToken(AccessTokenRequestTransfer $accessTokenRequestTransfer): AccessTokenResponseTransfer;
+
+    /**
+     * Specification:
+     * - Retrieves an access token from an access token provider with auth credantials.
+     *
+     * @api
+     *
+     * @return \Generated\Shared\Transfer\HttpRequestTransfer
+     */
+    public function expandHttpRequest(HttpRequestTransfer $httpRequestTransfer): HttpRequestTransfer;
 
     /**
      * Specification:

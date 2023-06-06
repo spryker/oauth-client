@@ -39,4 +39,8 @@
     <transfer name="PaymentAuthorizeRequest">
         <property name="authorization" type="string"/>
     </transfer>
+
+    <transfer name="HttpRequest">
+        <property name="authorization" type="string"/>
+    </transfer>
 </transfers>
