@@ -7,7 +7,6 @@
 
 namespace Spryker\Zed\OauthClient\Business\Provider;
 
-use Generated\Shared\Transfer\AccessTokenRequestOptionsTransfer;
 use Generated\Shared\Transfer\AccessTokenRequestTransfer;
 use Generated\Shared\Transfer\AccessTokenResponseTransfer;
 use Spryker\Zed\OauthClient\Business\Cache\AccessTokenCacheInterface;
@@ -82,7 +81,7 @@ class OauthAccessTokenProvider implements OauthAccessTokenProviderInterface
      * @return bool
      */
     protected function isOauthResponseCacheEnabled(AccessTokenRequestTransfer $accessTokenRequestTransfer): bool
-    {return false;
+    {
         return $this->oauthClientConfig->isCacheEnabled()
             && $accessTokenRequestTransfer->getIgnoreCache() !== true;
     }
